@@ -1,0 +1,5 @@
+msg.headers = {
+     "Content-Type": "text/xml;charset=UTF-8",
+     "SOAPAction": "test"
+}
+return msg;

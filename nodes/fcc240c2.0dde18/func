@@ -1,0 +1,9 @@
+msg.headers = {
+    "User-Agent": "gSOAP/2.8",
+     "Content-Type": "application/soap+xml; charset=utf-8; action=\"\"",
+     "Content-Length": 743,
+     "Connection":"keep-alive",
+     "Accept-Encoding":"gzip, deflate",
+     "SOAPAction": ""
+}
+return msg;

@@ -1,0 +1,12 @@
+msg.xmloutput = msg.payload["SOAP-ENV:Envelope"]
+    ["SOAP-ENV:Body"]
+    ["ns1:GetStationInfoResponse"]
+    ["return"]
+    ["xmloutput"];
+    
+msg.commonoutput = msg.payload["SOAP-ENV:Envelope"]
+    ["SOAP-ENV:Body"]
+    ["ns1:GetStationInfoResponse"]
+    ["return"]
+    ["commonoutput"];
+return msg;

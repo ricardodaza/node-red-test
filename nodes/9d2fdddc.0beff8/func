@@ -1,0 +1,3 @@
+var myName = msg.payload.name
+msg.payload.name = myName + " Richie"
+return msg;

@@ -1,0 +1,209 @@
+var dataStreamMap = {
+	'END201': 
+		{
+			dataStreamId: 'aCondFuncionamiento',
+			isAlert: true 
+		},
+	'END202': 
+		{
+			dataStreamId: 'gElecFalloArranque',
+			isAlert: true
+		},
+	'END203': 
+		{
+			dataStreamId: 'gElecGrupoMarcha',
+			isAlert: true 
+		},
+	'END204': 
+		{
+			dataStreamId: 'gElecMandoGrupo',
+			isAlert: true
+		},
+	'END101': 
+		{
+			dataStreamId: 'alimFaltaCorrienteAlterna',
+			isAlert: true 
+		},
+	'END102': 
+		{
+			dataStreamId: 'alimTensionContinua',
+			isAlert: false
+		},
+	'END103': 
+		{
+			dataStreamId: 'balizaFallo',
+			isAlert: true 
+		},
+	'END104': 
+		{
+			dataStreamId: 'bateriaMinimaTensionSalida',
+			isAlert: true
+		},
+	'END105': 
+		{
+			dataStreamId: 'converFalloCC',
+			isAlert: true 
+		},
+	'END106': 
+		{
+			dataStreamId: 'alimenFaltaCC',
+			isAlert: true
+		},
+	'END107': 
+		{
+			dataStreamId: 'humo',
+			isAlert: true 
+		},
+	'END108': 
+		{
+			dataStreamId: 'tempCaseta',
+			isAlert: false
+		},
+	'END109': 
+		{
+			dataStreamId: 'puerta',
+			isAlert: true 
+		},
+	'END110': 
+		{
+			dataStreamId: 'temp',
+			isAlert: true
+		},
+	'END111': 
+		{
+			dataStreamId: 'alimenMandoRearmadorAlterna',
+			isAlert: true 
+		},
+	'ENDOP01': 
+		{
+			dataStreamId: 'aCondMandoMarchaAire',
+			isAlert: true
+		},
+	'ENDOP02': 
+		{
+			dataStreamId: 'gElecAlarmaGrupo',
+			isAlert: true 
+		},
+	'ENDOP03': 
+		{
+			dataStreamId: 'gElecNivelCombustible',
+			isAlert: true
+		},			
+	'ENDOP04': 
+		{
+			dataStreamId: 'gElecMandoReset',
+			isAlert: true
+		},
+	'ENDOP05': 
+		{
+			dataStreamId: 'alimenSistemaSolarFallo',
+			isAlert: true 
+		},
+	'ENDOP06': 
+		{
+			dataStreamId: 'UPSBateriaBaja',
+			isAlert: true
+		},
+	'ENDOP07': 
+		{
+			dataStreamId: 'UPSFalloAlternaEntrada',
+			isAlert: true 
+		},
+	'ENDOP08': 
+		{
+			dataStreamId: 'humedadRelativa',
+			isAlert: false
+		},
+	'ENDOP09': 
+		{
+			dataStreamId: 'UPSOnduladorFallo',
+			isAlert: true 
+		},
+	'ENDOP10': 
+		{
+			dataStreamId: 'intrusPresencia',
+			isAlert: true
+		},	
+	'ENDOP11': 
+		{
+			dataStreamId: 'tierraPruebaMedida',
+			isAlert: true
+		},			
+	'ENDOP12': 
+		{
+			dataStreamId: 'rectifFalloCC',
+			isAlert: true 
+		},
+	'ENDOP13': 
+		{
+			dataStreamId: 'fibraFalloTerminal',
+			isAlert: true
+		},		
+	'ENDOP14': 
+		{
+			dataStreamId: 'monocanalFallo',
+			isAlert: true
+		},
+	'ENDOP15': 
+		{
+			dataStreamId: 'ondaFalloReceptor',
+			isAlert: true 
+		},
+	'ENDOP16': 
+		{
+			dataStreamId: 'ondaFalloRuido',
+			isAlert: true
+		},
+	'ENDOP17': 
+		{
+			dataStreamId: 'ondaFalloTransmisor',
+			isAlert: true 
+		},
+	'ENDOP18': 
+		{
+			dataStreamId: 'presurFallo',
+			isAlert: true
+		},
+	'ENDOP19': 
+		{
+			dataStreamId: 'radioFallo',
+			isAlert: true 
+		}												
+};
+
+msg.dataStreams = []; // Mapped data streams will be stored in msg variable to be used in other nodes.
+for (var i = 0; i < msg.payload.data.length; i++ ){
+    var businessId = msg.payload.data[i].businessId;
+    if(typeof dataStreamMap[businessId] !== 'undefined') {
+        var dataStreamId = dataStreamMap[businessId].dataStreamId;
+        var isAlert = dataStreamMap[businessId].isAlert;
+        var dataPointValue = msg.payload.data[i].number;
+        if (isAlert) {
+           // Convert number to boolean
+           dataPointValue = dataPointValue === 1 ? true : false; 
+       }
+        var dataStream = {
+          id: dataStreamId,
+          datapoints: [
+              {
+                at: msg.payload.data[i].timeStamp,
+                value: dataPointValue
+              }
+          ]
+        };
+        msg.dataStreams.push(dataStream);
+    }
+}
+var location =
+{
+    id: 'location',
+    datapoints: [
+        {
+        value: msg.payload.locationId
+        }
+    ]
+}
+
+msg.dataStreams.push(location);
+
+return msg;

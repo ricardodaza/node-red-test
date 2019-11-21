@@ -1,0 +1,10 @@
+var ogMessage = {
+    version:"1.0.0",
+    device: msg.deviceId,
+    path:[],
+    datastreams: msg.dataStreams
+};
+
+msg.payload = ogMessage;
+
+return msg;

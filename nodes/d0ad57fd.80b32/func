@@ -1,0 +1,5 @@
+msg.payload = msg.payload["soap:Envelope"]
+    ["soap:Body"][0]
+    ["m:GetStockPrice"][0]
+    ["m:StockName"][0]
+return msg;

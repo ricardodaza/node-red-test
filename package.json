@@ -1,0 +1,12 @@
+{
+  "name": "node-red-project",
+  "description": "A Node-RED Project",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "node-red-contrib-amqp": "~1.0.1",
+    "node-red-contrib-git-nodes": "~0.2.2",
+    "node-red-contrib-gitlab": "0.0.7",
+    "node-red-contrib-simple-soap": "~0.1.3"
+  }
+}

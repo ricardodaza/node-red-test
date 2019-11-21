@@ -1,0 +1,8 @@
+var topicParts = msg.topic.split('/');
+
+msg.deviceId = msg.payload.edgenodeId;
+
+var opengate = global.get("opengate");
+msg.opengate = opengate;
+
+return msg;
